@@ -1,0 +1,95 @@
+/* static/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.stat-card {
+    @apply bg-gray-800/60 p-4 rounded-lg shadow-lg text-center transition-all duration-300 hover:bg-gray-700/80;
+}
+
+.stat-label {
+    @apply text-xs text-gray-400 uppercase tracking-wider font-bold;
+}
+
+.stat-value {
+    @apply text-2xl font-bold mt-1 font-mono;
+}
+
+.control-btn {
+    @apply px-4 py-2 rounded-md font-bold text-sm flex items-center justify-center transition-all duration-200 shadow-md;
+}
+
+.log-entry {
+    @apply flex items-start gap-3 p-3 rounded-lg bg-gray-700/50;
+}
+
+.log-entry.welcome {
+    @apply bg-blue-500/10 border-l-4 border-blue-400;
+}
+
+.log-entry.anomaly {
+     @apply bg-red-500/10 border-l-4 border-red-400 animate-pulse-once;
+}
+
+.log-icon {
+    @apply flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-lg;
+}
+.log-icon.info { @apply bg-blue-500/20 text-blue-300; }
+.log-icon.anomaly { @apply bg-red-500/20 text-red-300; }
+
+/* Draggable Chart Styles */
+.draggable-container {
+    position: relative;
+    min-height: 600px; /* Ensure container has enough space */
+    overflow: hidden; /* Keep content within bounds */
+}
+
+.draggable-content {
+    position: absolute;
+    width: calc(100% - 2rem); /* Account for padding */
+    will-change: transform;
+    cursor: move;
+    transition: transform 0.1s ease-out;
+    z-index: 10;
+}
+
+.draggable-content:active {
+    cursor: grabbing;
+}
+
+.chart-header {
+    @apply flex justify-between items-center mb-2 pb-2 border-b border-gray-700;
+    cursor: move;
+}
+
+.chart-header span {
+    @apply text-xs text-gray-400;
+}
+
+/* Animation for anomaly alerts */
+@keyframes pulse-once {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { transform: scale(1.02); box-shadow: 0 0 10px 15px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.animate-pulse-once {
+  animation: pulse-once 1s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .draggable-content {
+        position: relative;
+        width: 100%;
+        top: auto !important;
+        left: auto !important;
+    }
+}

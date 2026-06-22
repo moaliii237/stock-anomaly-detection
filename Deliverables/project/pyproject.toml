@@ -1,0 +1,66 @@
+[project]
+name = "project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "SzymonChirowski242621",email = "242621@buas.nl"},
+    {name = "HristiyanGeorgiev241236",email = "241236@buas.nl"},
+    {name = "MohammadaliJaberi244437",email = "244437@buas.nl"}
+]
+readme = "README.md"
+requires-python = ">=3.11, <3.12"
+dependencies = [
+    "numpy (>=1.26.0,<2.2.0)",
+    "pandas (>=2.3.0,<3.0.0)",
+    "imbalanced-learn (>=0.13.0,<0.14.0)",
+    "matplotlib (>=3.10.3,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "tensorflow (>=2.13.0,<3.0.0)",
+    "tensorflow-io-gcs-filesystem (==0.31.0)",
+    "notebook (>=7.4.3,<8.0.0)",
+    "flask (>=3.1.1,<4.0.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "psycopg2 (>=2.9.10,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [
+    {include = "project", from = "src"},
+    {include = "src"}
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = {extras = ["jupyter"], version = "^25.1.0"}
+flake8-pyproject = "^1.2.3" # flake8-pyproject was installed instead of flake8 as this version supports pyproject.toml configuration, besides that it is a drop-in replacement for flake8
+pytest = "^8.4.0"
+pytest-cov = "^6.2.1"
+sphinx = "^8.2.3"
+
+[tool.black]
+line-length = 88 # default value
+target-version = ['py311']
+
+[tool.flake8]
+max-line-length = 88 # max line length changed to avoid conflicts with black
+ignore = ["E203", "W503"] # E203: whitespace before ':', W503: line break before binary operator; configured to avoid conflicts with black
+exclude = [".git", "__pycache__", "build", "dist", ".venv", ".env", ".mypy_cache", ".pytest_cache"] # exclude common directories that should not be checked by flake8
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--ignore=src/project/app/create_artifacts.py" # ignore create_artifacts.py as it is not part of the production code and is used for development purposes only
+
+[tool.coverage.run]
+omit = [
+    "src/project/app/create_artifacts.py", # ignore create_artifacts.py as it is not part of the production code and is used for development purposes only
+    "*/__init__.py" # exclude __init__.py files from coverage
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if __name__ == .__main__.:", # exclude main block from coverage report
+]
