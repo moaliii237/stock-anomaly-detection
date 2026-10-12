@@ -3,9 +3,9 @@ name = "project"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "SzymonChirowski242621",email = "242621@buas.nl"},
-    {name = "HristiyanGeorgiev241236",email = "241236@buas.nl"},
-    {name = "MohammadaliJaberi244437",email = "244437@buas.nl"}
+    {name = "SzymonChirowski242621"},
+    {name = "HristiyanGeorgiev241236"},
+    {name = "MohammadaliJaberi244437"}
 ]
 readme = "README.md"
 requires-python = ">=3.11, <3.12"
